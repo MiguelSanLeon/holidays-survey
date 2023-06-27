@@ -1,7 +1,9 @@
 import gspread
 import pandas as pd
+import os
 from google.oauth2.service_account import Credentials
 from colorama import Fore, Style, Back
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -29,7 +31,30 @@ BLUE = Fore.BLUE  # blue text for tables
 BACKGROUND = Back.WHITE  # white background for tables
 RESET = Style.RESET_ALL  # resets the colours
 
+def clear_screen():
+    """
+    This function clear the console screen. 
+    The provided code checks whether the operating system
+     is posix (as in Linux or macOS) or not, and runs the
+    appropriate command to clear the screen.
+    code taken from geeksforgeeks.org
+    """
+    if os.name = "posix":
+        _ = os.system("clear")
+    else:
+        _ = os.system("cls")
+
+
+def first_selection():
+
+
+
 def get_age_group():
+    """
+    Generates an input to ask the user's age and return the age range 
+    to which the user belongs
+    """
+
     age = 0
     while age < 1 or age > 100:
         try: 
@@ -51,6 +76,7 @@ def get_age_group():
     else:
         return '60+'
 
-age_group = get_age_group()
+# age_group = get_age_group()
 
-print(WHITE + 'Your age group is:', age_group + RESET)
+# print(WHITE + 'Your age group is:', age_group + RESET)
+

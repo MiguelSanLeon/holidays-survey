@@ -29,3 +29,28 @@ BLUE = Fore.BLUE  # blue text for tables
 BACKGROUND = Back.WHITE  # white background for tables
 RESET = Style.RESET_ALL  # resets the colours
 
+def get_age_group():
+    age = 0
+    while age < 1 or age > 100:
+        try: 
+            age = int(input(YELLOW +'What is yout age?'+ RESET))
+            if age < 1 or age > 100:
+                print(RED +'Please enter a number between 1 and 100.'+ RESET)
+        except ValueError:
+            print(RED + 'Please enter a valid number.'+ RESET)
+    if  age <= 18:
+        return '1-18'
+    if  age <= 28:
+        return '19-28'
+    if  age <= 38:
+        return '29-38'
+    if  age <= 48:
+        return '39-48'
+    if  age <= 60:
+        return '49-60'
+    else:
+        return '60+'
+
+age_group = get_age_group()
+
+print(WHITE + 'Your age group is:', age_group + RESET)

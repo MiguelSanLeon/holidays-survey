@@ -67,14 +67,14 @@ def first_selection():
             print(RED + "Invalid input, please enter a valid number" + RESET)
     clear_screen()
     if selection == 1:
-        print("testing survey")
-        # get_survey()
+        get_survey()
     else:
         print("testing results")
         # survey_results()
 
 
 user_choices = []  # global variable to store user choices
+
 
 def display_questions_and_options(column, num_options):
     """
@@ -106,11 +106,12 @@ def display_questions_and_options(column, num_options):
     print(YELLOW + f"You selected: {selected_option}" + RESET)
     user_choices.append(selected_option)
 
+
 def get_survey():
     """
     This function iterates over a dictionary with columns as keywords
     and num_options as values to generate all the questions for the
-    survey.
+    survey. Then return a list with all the choosen options.
     """
     survey_questions = {
         1: 6,  # question 1 with 6 options
@@ -134,5 +135,29 @@ def get_survey():
     print("Survey completed")
 
 # first_selection()
-get_survey()
+
+
+def welcome():
+    print("""\
+    db   db  .d88b.  db      d888888b d8888b.  .d8b.  db    db
+    88   88 .8P  Y8. 88        `88'   88  `8D d8' `8b `8b  d8'
+    88ooo88 88    88 88         88    88   88 88ooo88  `8bd8'
+    88~~~88 88    88 88         88    88   88 88~~~88    88
+    88   88 `8b  d8' 88booo.   .88.   88  .8D 88   88    88
+    YP   YP  `Y88P'  Y88888P Y888888P Y8888D' YP   YP    YP
+
+
+    .d8888. db    db d8888b. db    db d88888b db    db
+    88'  YP 88    88 88  `8D 88    88 88'     `8b  d8'
+    `8bo.   88    88 88oobY' Y8    8P 88ooooo  `8bd8'
+      `Y8b. 88    88 88`8b   `8b  d8' 88~~~~~    88
+    db   8D 88b  d88 88 `88.  `8bd8'  88.        88
+    `8888Y' ~Y8888P' 88   YD    YP    Y88888P    YP
+    """)
+    time.sleep(4)
+    clear_screen()
+
+
+welcome()
+first_selection()
 print(user_choices)

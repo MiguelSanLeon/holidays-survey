@@ -1,6 +1,7 @@
 import gspread
 import pandas as pd
 import os
+import time
 from google.oauth2.service_account import Credentials
 from colorama import Fore, Style, Back
 
@@ -31,11 +32,12 @@ BLUE = Fore.BLUE  # blue text for tables
 BACKGROUND = Back.WHITE  # white background for tables
 RESET = Style.RESET_ALL  # resets the colours
 
+
 def clear_screen():
     """
-    This function clear the console screen. 
+    This function clear the console screen.
     The provided code checks whether the operating system
-     is posix (as in Linux or macOS) or not, and runs the
+    is posix (as in Linux or macOS) or not, and runs the
     appropriate command to clear the screen.
     code taken from geeksforgeeks.org
     """
@@ -55,9 +57,9 @@ def first_selection():
         try:
             print(WHITE + "Select an option:\n")
             print("1 - Take the Survey.")
-            print("2 - View Survey results.\n"+ RESET)
-            selection = int(input(YELLOW + "Enter your choice: " + RESET ))
-            if selection !=1 and selection != 2:
+            print("2 - View Survey results.\n" + RESET)
+            selection = int(input(YELLOW + "Enter your choice: " + RESET))
+            if selection != 1 and selection != 2:
                 clear_screen()
                 print(RED + "Invalid choice, please enter 1 or 2" + RESET)
         except ValueError:
@@ -72,18 +74,23 @@ def first_selection():
         # survey_results()
 
 
-def display_questions_and_options(column,num_options):
+user_choices = []  # global variable to store user choices
+
+def display_questions_and_options(column, num_options):
     """
-    Display the question and the options that correspond to the column and options parameters given. 
+    Display the question and the options that correspond to the column and
+    options parameters given.
     """
+    global user_choices  # access to the global variable
+
     data = SHEET.worksheet('predefined_answers').get_all_values()
 
-    question = data[0][column - 1] # question is taken from row 0 and [column -1] to avoid counting column 0
+    question = data[0][column - 1]
     options = [row[column - 1]for row in data[1:]]
 
     print(YELLOW + question + RESET)
-    for i, option in enumerate (options, start= 1):
-        print(YELLOW + f"{i}. {option}" + RESET) 
+    for i, option in enumerate(options, start=1):
+        print(YELLOW + f"{i}. {option}" + RESET)
         if i >= num_options:
             break
     user_input = -1
@@ -91,45 +98,41 @@ def display_questions_and_options(column,num_options):
         try:
             user_input = int(input(YELLOW + "Enter your choice: " + RESET))
             if user_input < 1 or user_input > num_options:
-                print(RED + f"Invalid choice. Please enter a number between 1 and {options}" + RESET)
+                print(RED + f"Invalid choice. Please enter a number between 1 and {num_options}" + RESET)
         except ValueError:
             print(RED + "Invalid input. Please enter a valid number." + RESET)
 
     selected_option = options[user_input - 1]
-    print (YELLOW + f"You selected: {selected_option}" + RESET)
+    print(YELLOW + f"You selected: {selected_option}" + RESET)
+    user_choices.append(selected_option)
 
-    return selected_option
-
-
-def get_age_group():
+def get_survey():
     """
-    Generates an input to ask the user's age and return the age range 
-    to which the user belongs
+    This function iterates over a dictionary with columns as keywords
+    and num_options as values to generate all the questions for the
+    survey.
     """
+    survey_questions = {
+        1: 6,  # question 1 with 6 options
+        2: 2,  # question 2 with 2 options
+        3: 4,  # question 3 with 4 options
+        4: 4,  # question 4 with 4 options
+        5: 6,  # question 5 with 6 options
+        6: 8,  # question 6 with 8 options
+        7: 9,  # question 7 with 9 options
+        8: 9,  # question 8 with 9 options
+        9: 9,  # question 9 with 9 options
+        10: 2,  # question 10 with 2 options
+    }
 
-    age = 0
-    while age < 1 or age > 100:
-        try: 
-            age = int(input(YELLOW +'What is yout age?'+ RESET))
-            if age < 1 or age > 100:
-                print(RED +'Please enter a number between 1 and 100.'+ RESET)
-        except ValueError:
-            print(RED + 'Please enter a valid number.'+ RESET)
-    if  age <= 18:
-        return '1-18'
-    if  age <= 28:
-        return '19-28'
-    if  age <= 38:
-        return '29-38'
-    if  age <= 48:
-        return '39-48'
-    if  age <= 60:
-        return '49-60'
-    else:
-        return '60+'
+    for column, num_options in survey_questions.items():
+        display_questions_and_options(column, num_options)
 
-# age_group = get_age_group()
+        time.sleep(2)
+        clear_screen()
 
-# print(WHITE + 'Your age group is:', age_group + RESET)
-#first_selection()
-display_questions_and_options(5,4)
+    print("Survey completed")
+
+# first_selection()
+get_survey()
+print(user_choices)

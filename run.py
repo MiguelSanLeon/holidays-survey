@@ -28,7 +28,7 @@ df.head()
 RED = Fore.RED  # red text for error messages
 WHITE = Fore.WHITE  # white text for instructions
 YELLOW = Fore.YELLOW  # yellow text for questions and inputs
-BLUE = Fore.BLUE  # blue text for tables
+BLUE = Fore.BLUE  # blue text for tables & highlighted text
 BACKGROUND = Back.WHITE  # white background for tables
 RESET = Style.RESET_ALL  # resets the colours
 
@@ -132,12 +132,60 @@ def get_survey():
         time.sleep(2)
         clear_screen()
 
-    print("Survey completed")
+    completed_survey_options()
 
-# first_selection()
+
+def update_survey_answers(data):
+    """
+    Update the survey_answers worksheet with the data provided by the user.
+    """
+    print(WHITE + "Updating the survey results...\n" + RESET)
+    SHEET.worksheet("survey_answers").append_row(data)
+    print(WHITE + "The survey results has been updated\n" + RESET)
+
+
+def completed_survey_options():
+    """
+    Displays various options to the user after completing the survey
+    and executes the option that the user requests.
+    """
+    clear_screen()
+    print(BLUE + "THANK YOU FOR COMPLETING THE SURVEY." + RESET)
+    print(WHITE + "Survey results:")
+    for i, choice in enumerate(user_choices):
+        print(f"Question {i + 1}. You answer: {choice}" + RESET)
+    print(BLUE + "1- Not happy with your answwers?.Repeat the survey.")
+    print("2- Submit your answers and view survey results.")
+    print("3- Submit your answers and exit survey." + RESET)
+
+    user_input = 0
+
+    while user_input < 1 or user_input > 3:
+        try:
+            user_input = int(input(YELLOW + "Enter your choice: " + RESET))
+            if user_input < 1 or user_input > 3:
+                print(RED + "Invalid choice. Please enter a number between 1 and 3" + RESET)
+        except ValueError:
+            print(RED + "Invalid input. Please enter a valid number." + RESET)
+    if user_input == 1:
+        clear_screen()
+        user_choices.clear()
+        get_survey()
+    elif user_input == 2:
+        clear_screen()
+        update_survey_answers(user_choices)
+        time.sleep(3)
+        survey_results()
+    elif user_input == 3:
+        clear_screen()
+        update_survey_answers(user_choices)
+        exit()
 
 
 def welcome():
+    """
+    Welcome message to start the holiday survey.
+    """
     print("""\
     db   db  .d88b.  db      d888888b d8888b.  .d8b.  db    db
     88   88 .8P  Y8. 88        `88'   88  `8D d8' `8b `8b  d8'
@@ -160,4 +208,3 @@ def welcome():
 
 welcome()
 first_selection()
-print(user_choices)

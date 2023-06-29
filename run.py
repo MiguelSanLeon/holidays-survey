@@ -47,10 +47,37 @@ def clear_screen():
         _ = os.system("cls")
 
 
+def survey_results():
+    """
+    This function request the user to choose between different
+    options to show the survey results.
+    """
+    selection = 0
+    while selection != 1 and selection != 2:
+        try:
+            print(WHITE + "Select an option:\n")
+            print("1 - Show the results by age group.")
+            print("2 - Show the results by gender.\n" + RESET)
+            selection = int(input(YELLOW + "Enter your choice: " + RESET))
+            if selection != 1 and selection != 2:
+                clear_screen()
+                print(RED + "Invalid choice, please enter 1 or 2" + RESET)
+        except ValueError:
+            clear_screen()
+            print(RED + "Invalid input, please enter a valid number" + RESET)
+    clear_screen()
+    if selection == 1:
+        clear_screen()
+        show_results(df,groupby_col='age group')
+    else:
+        clear_screen()
+        show_results(df,groupby_col='gender')
+
+
 def first_selection():
     """
-    This feature allows users to choose between taking the survey
-     and viewing the survey results.
+    This function allows users to choose between taking the survey
+    and viewing the survey results.
     """
     selection = 0
     while selection != 1 and selection != 2:
@@ -69,8 +96,7 @@ def first_selection():
     if selection == 1:
         get_survey()
     else:
-        print("testing results")
-        # survey_results()
+        survey_results()
 
 
 user_choices = []  # global variable to store user choices
@@ -98,7 +124,8 @@ def display_questions_and_options(column, num_options):
         try:
             user_input = int(input(YELLOW + "Enter your choice: " + RESET))
             if user_input < 1 or user_input > num_options:
-                print(RED + f"Invalid choice. Please enter a number between 1 and {num_options}" + RESET)
+                print(RED + "Invalid choice. Please enter a number" +
+                            f"between 1 and {num_options}" + RESET)
         except ValueError:
             print(RED + "Invalid input. Please enter a valid number." + RESET)
 
@@ -154,7 +181,7 @@ def completed_survey_options():
     print(WHITE + "Survey results:")
     for i, choice in enumerate(user_choices):
         print(f"Question {i + 1}. You answer: {choice}" + RESET)
-    print(BLUE + "1- Not happy with your answwers?.Repeat the survey.")
+    print(BLUE + "\n1- Not happy with your answwers?.Repeat the survey.")
     print("2- Submit your answers and view survey results.")
     print("3- Submit your answers and exit survey." + RESET)
 
@@ -164,7 +191,8 @@ def completed_survey_options():
         try:
             user_input = int(input(YELLOW + "Enter your choice: " + RESET))
             if user_input < 1 or user_input > 3:
-                print(RED + "Invalid choice. Please enter a number between 1 and 3" + RESET)
+                print(RED + "Invalid choice. Please enter a number" +
+                            "between 1 and 3" + RESET)
         except ValueError:
             print(RED + "Invalid input. Please enter a valid number." + RESET)
     if user_input == 1:

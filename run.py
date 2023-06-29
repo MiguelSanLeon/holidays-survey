@@ -68,10 +68,36 @@ def survey_results():
     clear_screen()
     if selection == 1:
         clear_screen()
-        show_results(df,groupby_col='age group')
+        question_selection(df,groupby_col='age group')
     else:
         clear_screen()
-        show_results(df,groupby_col='gender')
+        question_selection(df,groupby_col='gender')
+
+
+def question_selection(df_raw,groupby_col):
+    """
+    This function allows the user to choose between the different
+    questions displayed in the survey and then show the results in 
+    porcentages.
+    """
+    print(WHITE + "Select a question to show the results:\n")
+    headers = SHEET.worksheet('predefined_answers').row_values(1)
+    num_of_questions = (len(headers)-2)
+    for i, header in enumerate(headers[2:], start=1):
+        print(YELLOW + f"{i}. {header}" + RESET)
+    user_input = 0
+    while user_input < 1 or user_input > num_of_questions:
+        try:
+            user_input = int(input(YELLOW + "\nEnter your choice: " + RESET))
+            if user_input < 1 or user_input > num_of_questions:
+                print(RED + "Invalid choice. Please enter a number" +
+                            f"between 1 and {num_of_questions}" + RESET)
+        except ValueError:
+            print(RED + "Invalid input. Please enter a valid number." + RESET)
+    
+    # display_percentage(df, groupby_col, user_input)
+    return user_input
+    print(user_input)
 
 
 def first_selection():

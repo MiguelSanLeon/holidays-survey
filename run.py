@@ -2,6 +2,8 @@ import gspread
 import pandas as pd
 import os
 import time
+import numpy as np
+from tabulate import tabulate
 from google.oauth2.service_account import Credentials
 from colorama import Fore, Style, Back
 
@@ -68,19 +70,20 @@ def survey_results():
     clear_screen()
     if selection == 1:
         clear_screen()
-        question_selection(df,groupby_col='age group')
+        question_selection(df, groupby_col='age group')
     else:
         clear_screen()
-        question_selection(df,groupby_col='gender')
+        question_selection(df, groupby_col='gender')
 
 
-def question_selection(df_raw,groupby_col):
+def question_selection(df_raw, groupby_col):
     """
     This function allows the user to choose between the different
     questions displayed in the survey and then show the results in 
     porcentages.
     """
-    print(WHITE + "Select a question to show the results:\n")
+    print(WHITE + "Select a question to show the results.\n")
+    print("Then press Enter.")
     headers = SHEET.worksheet('predefined_answers').row_values(1)
     num_of_questions = (len(headers)-2)
     for i, header in enumerate(headers[2:], start=1):
@@ -95,9 +98,32 @@ def question_selection(df_raw,groupby_col):
         except ValueError:
             print(RED + "Invalid input. Please enter a valid number." + RESET)
     
-    # display_percentage(df, groupby_col, user_input)
-    return user_input
-    print(user_input)
+    display_percentage(df_raw, groupby_col, user_input)
+   
+
+def display_percentage(df_raw, groupby_col, question):
+    question_list = SHEET.worksheet('survey_answers').row_values(1)
+    question = question + 1
+    df_group = df_raw.groupby(
+        [groupby_col, question_list[question]]).size().reset_index()
+    df_group.rename(columns={0: 'counts'}, inplace=True)
+    label_total_by_group = f'total_by_{groupby_col}'
+    df_group[label_total_by_group] = \
+        df_group.groupby(groupby_col)['counts'].transform(sum)
+    df_group['percentage'] = np.round(
+        df_group['counts'] / df_group[label_total_by_group] * 100
+        )
+    df_group['percentage'] = df_group['percentage'].apply(
+        lambda x: f'{int(x)}%')
+
+    if "" in df_raw.column:
+        df_raw.drop(columns="", inplace=True)
+    df_raw.fillna('0%', inplace=True)
+
+    # prints table with results
+    print(
+        BLUE + BACKGROUND + tabulate(df_group, headers='keys', tablefmt='psql')
+        + RESET)
 
 
 def first_selection():

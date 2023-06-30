@@ -55,13 +55,14 @@ def survey_results():
     options to show the survey results.
     """
     selection = 0
-    while selection != 1 and selection != 2:
+    while selection != 1 and selection != 2 and selection != 3:
         try:
             print(WHITE + "Select an option:\n")
             print("1 - Show the results by age group.")
-            print("2 - Show the results by gender.\n" + RESET)
+            print("2 - Show the results by gender.")
+            print("3 - Exit.\n" + RESET)
             selection = int(input(YELLOW + "Enter your choice: " + RESET))
-            if selection != 1 and selection != 2:
+            if selection != 1 and selection != 2 and selection != 3:
                 clear_screen()
                 print(RED + "Invalid choice, please enter 1 or 2" + RESET)
         except ValueError:
@@ -71,9 +72,11 @@ def survey_results():
     if selection == 1:
         clear_screen()
         question_selection(df, groupby_col='age group')
-    else:
+    elif selection == 2:
         clear_screen()
         question_selection(df, groupby_col='gender')
+    elif selection == 3:
+        exit()
 
 
 def question_selection(df_raw, groupby_col):
@@ -94,7 +97,7 @@ def question_selection(df_raw, groupby_col):
             user_input = int(input(YELLOW + "\nEnter your choice: " + RESET))
             if user_input < 1 or user_input > num_of_questions:
                 print(RED + "Invalid choice. Please enter a number" +
-                            f"between 1 and {num_of_questions}" + RESET)
+                         f"between 1 and {num_of_questions}" + RESET)
         except ValueError:
             print(RED + "Invalid input. Please enter a valid number." + RESET)
     
@@ -116,7 +119,7 @@ def display_percentage(df_raw, groupby_col, question):
     df_group['percentage'] = df_group['percentage'].apply(
         lambda x: f'{int(x)}%')
 
-    if "" in df_raw.column:
+    if "" in df_raw.columns:
         df_raw.drop(columns="", inplace=True)
     df_raw.fillna('0%', inplace=True)
 
@@ -124,6 +127,14 @@ def display_percentage(df_raw, groupby_col, question):
     print(
         BLUE + BACKGROUND + tabulate(df_group, headers='keys', tablefmt='psql')
         + RESET)
+    print("Press Enter to return to previous screen")
+    call_survey_results()
+
+
+def call_survey_results():
+    input()
+    clear_screen()
+    survey_results()
 
 
 def first_selection():

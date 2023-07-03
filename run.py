@@ -105,25 +105,38 @@ def question_selection(df_raw, groupby_col):
    
 
 def display_percentage(df_raw, groupby_col, question):
+    """
+    This function generates a counts column and label_total_by_group
+    column to calculate the percentages of the choosen answer
+    in a table and print the results.
+    """
+    # get all values from the survey_answers sheet
     question_list = SHEET.worksheet('survey_answers').row_values(1)
+    # sums 1 to variable question to avoid the 0 element in the list
     question = question + 1
+    # select the question and store the info in df_group variable
     df_group = df_raw.groupby(
         [groupby_col, question_list[question]]).size().reset_index()
+    # rename the column 0 to counts in df_group
     df_group.rename(columns={0: 'counts'}, inplace=True)
+    # Create the label_total_by_group column name
     label_total_by_group = f'total_by_{groupby_col}'
+    # sums all values for the selected column(group_col)
     df_group[label_total_by_group] = \
         df_group.groupby(groupby_col)['counts'].transform(sum)
+    # calculate the percentage for each group    
     df_group['percentage'] = np.round(
         df_group['counts'] / df_group[label_total_by_group] * 100
         )
+    #convert the float x number in a percentage string x%
     df_group['percentage'] = df_group['percentage'].apply(
         lambda x: f'{int(x)}%')
+    # erase empty columns and fill emty cells in df_group
+    if "" in df_group.columns:
+        df_group.drop(columns="", inplace=True)
+    df_group.fillna('0%', inplace=True)
 
-    if "" in df_raw.columns:
-        df_raw.drop(columns="", inplace=True)
-    df_raw.fillna('0%', inplace=True)
-
-    # prints table with results
+    # prints table with results.
     print(
         BLUE + BACKGROUND + tabulate(df_group, headers='keys', tablefmt='psql')
         + RESET)
@@ -277,25 +290,11 @@ def welcome():
     """
     Welcome message to start the holiday survey.
     """
-    print("""\
-    db   db  .d88b.  db      d888888b d8888b.  .d8b.  db    db
-    88   88 .8P  Y8. 88        `88'   88  `8D d8' `8b `8b  d8'
-    88ooo88 88    88 88         88    88   88 88ooo88  `8bd8'
-    88~~~88 88    88 88         88    88   88 88~~~88    88
-    88   88 `8b  d8' 88booo.   .88.   88  .8D 88   88    88
-    YP   YP  `Y88P'  Y88888P Y888888P Y8888D' YP   YP    YP
-
-
-    .d8888. db    db d8888b. db    db d88888b db    db
-    88'  YP 88    88 88  `8D 88    88 88'     `8b  d8'
-    `8bo.   88    88 88oobY' Y8    8P 88ooooo  `8bd8'
-      `Y8b. 88    88 88`8b   `8b  d8' 88~~~~~    88
-    db   8D 88b  d88 88 `88.  `8bd8'  88.        88
-    `8888Y' ~Y8888P' 88   YD    YP    Y88888P    YP
-    """)
+    welcome_message = SHEET.worksheet('other_text').col_values(1)
+    print(welcome_message[1])
     time.sleep(4)
     clear_screen()
+    first_selection()
 
 
 welcome()
-first_selection()

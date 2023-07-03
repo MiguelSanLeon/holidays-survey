@@ -60,7 +60,7 @@ def survey_results():
             print(WHITE + "Select an option:\n")
             print("1 - Show the results by age group.")
             print("2 - Show the results by gender.")
-            print("3 - Exit.\n" + RESET)
+            print("3 - Back to main menu.\n" + RESET)
             selection = int(input(YELLOW + "Enter your choice: " + RESET))
             if selection != 1 and selection != 2 and selection != 3:
                 clear_screen()
@@ -76,7 +76,8 @@ def survey_results():
         clear_screen()
         question_selection(df, groupby_col='gender')
     elif selection == 3:
-        exit()
+        clear_screen()
+        first_selection()
 
 
 def question_selection(df_raw, groupby_col):
@@ -158,6 +159,7 @@ def first_selection():
     selection = 0
     while selection != 1 and selection != 2:
         try:
+            print(BLUE + "MAIN MENU" + RESET)
             print(WHITE + "Select an option:\n")
             print("1 - Take the Survey.")
             print("2 - View Survey results.\n" + RESET)
@@ -291,8 +293,16 @@ def welcome():
     Welcome message to start the holiday survey.
     """
     welcome_message = SHEET.worksheet('other_text').col_values(1)
-    print(welcome_message[1])
-    time.sleep(4)
+    instrucctions = SHEET.worksheet('other_text').col_values(2)
+    print(BLUE + welcome_message[1] + RESET)
+    print("Loading, please wait...")
+    time.sleep(5)
+    clear_screen()
+    print(WHITE + instrucctions[1].upper() + RESET)
+    input("press Enter to continue")
+    clear_screen()
+    print(WHITE + instrucctions[2].upper() + RESET)
+    input("press Enter to continue")
     clear_screen()
     first_selection()
 

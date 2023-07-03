@@ -83,7 +83,7 @@ def survey_results():
 def question_selection(df_raw, groupby_col):
     """
     This function allows the user to choose between the different
-    questions displayed in the survey and then show the results in 
+    questions displayed in the survey and then show the results in
     porcentages.
     """
     print(WHITE + "Select a question to show the results.\n")
@@ -98,12 +98,12 @@ def question_selection(df_raw, groupby_col):
             user_input = int(input(YELLOW + "\nEnter your choice: " + RESET))
             if user_input < 1 or user_input > num_of_questions:
                 print(RED + "Invalid choice. Please enter a number" +
-                         f"between 1 and {num_of_questions}" + RESET)
+                      f"between 1 and {num_of_questions}" + RESET)
         except ValueError:
             print(RED + "Invalid input. Please enter a valid number." + RESET)
-    
+
     display_percentage(df_raw, groupby_col, user_input)
-   
+
 
 def display_percentage(df_raw, groupby_col, question):
     """
@@ -125,11 +125,10 @@ def display_percentage(df_raw, groupby_col, question):
     # sums all values for the selected column(group_col)
     df_group[label_total_by_group] = \
         df_group.groupby(groupby_col)['counts'].transform(sum)
-    # calculate the percentage for each group  
+    # calculate the percentage for each group
     df_group['percentage'] = np.round(
-        df_group['counts'] / df_group[label_total_by_group] * 100
-        )
-    #convert the float x number in a percentage string x%
+        df_group['counts'] / df_group[label_total_by_group] * 100)
+    # convert the float x number in a percentage string x%
     df_group['percentage'] = df_group['percentage'].apply(
         lambda x: f'{int(x)}%')
     # erase empty columns and fill emty cells in df_group
@@ -157,14 +156,15 @@ def first_selection():
     and viewing the survey results.
     """
     selection = 0
-    while selection != 1 and selection != 2:
+    while selection != 1 and selection != 2 and selection != 3:
         try:
             print(BLUE + "MAIN MENU" + RESET)
             print(WHITE + "Select an option:\n")
             print("1 - Take the Survey.")
-            print("2 - View Survey results.\n" + RESET)
+            print("2 - View Survey results.")
+            print("3 - Exit.\n" + RESET)
             selection = int(input(YELLOW + "Enter your choice: " + RESET))
-            if selection != 1 and selection != 2:
+            if selection != 1 and selection != 2 and selection !=3:
                 clear_screen()
                 print(RED + "Invalid choice, please enter 1 or 2" + RESET)
         except ValueError:
@@ -173,8 +173,10 @@ def first_selection():
     clear_screen()
     if selection == 1:
         get_survey()
-    else:
+    elif selection == 2:
         survey_results()
+    elif selection == 3:
+        goodbye()
 
 
 user_choices = []  # global variable to store user choices
@@ -332,7 +334,7 @@ def goodbye():
         time.sleep(3)
         exit()
     else:
-       first_selection()
+        first_selection()
 
 
 welcome()

@@ -125,7 +125,7 @@ def display_percentage(df_raw, groupby_col, question):
     # sums all values for the selected column(group_col)
     df_group[label_total_by_group] = \
         df_group.groupby(groupby_col)['counts'].transform(sum)
-    # calculate the percentage for each group    
+    # calculate the percentage for each group  
     df_group['percentage'] = np.round(
         df_group['counts'] / df_group[label_total_by_group] * 100
         )
@@ -285,7 +285,7 @@ def completed_survey_options():
     elif user_input == 3:
         clear_screen()
         update_survey_answers(user_choices)
-        exit()
+        goodbye()
 
 
 def welcome():
@@ -305,6 +305,34 @@ def welcome():
     input("press Enter to continue")
     clear_screen()
     first_selection()
+
+
+def goodbye():
+    """
+    This function creates a goodbye message for the user
+    and ask if he really wants to exit.
+    """
+    selection = 0
+    while selection != 1 and selection != 2:
+        try:
+            print(BLUE + "Are you sure you want to exit?" + RESET)
+            print(YELLOW + " 1- YES.")
+            print(" 2- NO." + RESET)
+            selection = int(input(YELLOW + "Enter your choice: " + RESET))
+            if selection != 1 and selection != 2:
+                clear_screen()
+                print(RED + "Invalid choice, please enter 1 or 2" + RESET)
+        except ValueError:
+            clear_screen()
+            print(RED + "Invalid input, please enter a valid number" + RESET)
+    clear_screen()
+    if selection == 1:
+        goodbye_message = SHEET.worksheet('other_text').col_values(3)
+        print(BLUE + goodbye_message[1] + RESET)
+        time.sleep(3)
+        exit()
+    else:
+       first_selection()
 
 
 welcome()

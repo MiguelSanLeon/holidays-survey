@@ -89,7 +89,7 @@ def question_selection(df_raw, groupby_col):
     print(WHITE + "Select a question to show the results.\n")
     print("Then press Enter.")
     headers = SHEET.worksheet('predefined_answers').row_values(1)
-    num_of_questions = (len(headers)-2)
+    num_of_questions = (len(df.columns)(headers)-2)
     for i, header in enumerate(headers[2:], start=1):
         print(YELLOW + f"{i}. {header}" + RESET)
     user_input = 0
@@ -164,7 +164,7 @@ def first_selection():
             print("2 - View Survey results.")
             print("3 - Exit.\n" + RESET)
             selection = int(input(YELLOW + "Enter your choice: " + RESET))
-            if selection != 1 and selection != 2 and selection !=3:
+            if selection != 1 and selection != 2 and selection != 3:
                 clear_screen()
                 print(RED + "Invalid choice, please enter 1 or 2" + RESET)
         except ValueError:
@@ -204,9 +204,11 @@ def display_questions_and_options(column, num_options):
         try:
             user_input = int(input(YELLOW + "Enter your choice: " + RESET))
             if user_input < 1 or user_input > num_options:
+                clear_screen()
                 print(RED + "Invalid choice. Please enter a number" +
                             f"between 1 and {num_options}" + RESET)
         except ValueError:
+            clear_screen()
             print(RED + "Invalid input. Please enter a valid number." + RESET)
 
     selected_option = options[user_input - 1]
@@ -220,18 +222,22 @@ def get_survey():
     and num_options as values to generate all the questions for the
     survey. Then return a list with all the choosen options.
     """
-    survey_questions = {
-        1: 6,  # question 1 with 6 options
-        2: 2,  # question 2 with 2 options
-        3: 4,  # question 3 with 4 options
-        4: 4,  # question 4 with 4 options
-        5: 6,  # question 5 with 6 options
-        6: 8,  # question 6 with 8 options
-        7: 9,  # question 7 with 9 options
-        8: 9,  # question 8 with 9 options
-        9: 9,  # question 9 with 9 options
-        10: 2,  # question 10 with 2 options
-    }
+
+    data = SHEET.worksheet('predefined_answers').get_all_values()
+    df_answers = pd.DataFrame(data[1:], columns=data[0])
+
+    column_keys = len(df_answers.columns)
+    column_values = [
+        [value for value in df_answers[column].tolist()
+            if pd.notna(value) and value != ""]
+        for column in df_answers.columns
+        ]
+    options = [len(sublist) for sublist in column_values]
+
+    survey_questions = {}
+
+    for key, value in zip(range(1, column_keys + 1), options):
+        survey_questions[key] = value
 
     for column, num_options in survey_questions.items():
         display_questions_and_options(column, num_options)
@@ -296,6 +302,7 @@ def welcome():
     """
     welcome_message = SHEET.worksheet('other_text').col_values(1)
     instrucctions = SHEET.worksheet('other_text').col_values(2)
+    clear_screen()
     print(BLUE + welcome_message[1] + RESET)
     print("Loading, please wait...")
     time.sleep(5)

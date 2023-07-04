@@ -89,7 +89,7 @@ def question_selection(df_raw, groupby_col):
     print(WHITE + "Select a question to show the results.\n")
     print("Then press Enter.")
     headers = SHEET.worksheet('predefined_answers').row_values(1)
-    num_of_questions = (len(df.columns)(headers)-2)
+    num_of_questions = len(df.columns)-2
     for i, header in enumerate(headers[2:], start=1):
         print(YELLOW + f"{i}. {header}" + RESET)
     user_input = 0

@@ -83,8 +83,7 @@ def survey_results():
 def question_selection(df_raw, groupby_col):
     """
     This function allows the user to choose between the different
-    questions displayed in the survey and then show the results in
-    porcentages.
+    questions and apply filters to selection.
     """
     print(WHITE + "Select a question to show the results.\n")
     print("Then press Enter.")
@@ -114,7 +113,7 @@ def question_selection(df_raw, groupby_col):
                     input(YELLOW + "\nChoose an option: " + RESET))
                 if group_input < 1 or group_input > len(age_groups):
                     print(RED + "Invalid choice. Please enter a number" +
-                      f"between 1 and {age_groups}" + RESET)
+                          f"between 1 and {age_groups}" + RESET)
             except ValueError:
                 print(
                     RED + "Invalid input. Please enter a valid number" + RESET)
@@ -128,12 +127,14 @@ def question_selection(df_raw, groupby_col):
         group_input = 0
         while group_input < 1 or group_input > len(genders):
             try:
-                group_input = int(input(YELLOW + "\nChoose an option: " + RESET))
+                group_input = int(input(YELLOW + "\nChoose an option: "
+                                  + RESET))
                 if group_input < 1 or group_input > len(genders):
                     print(RED + "Invalid choice. Please enter a number" +
-                      f"between 1 and {genders}" + RESET)
+                          f"between 1 and {genders}" + RESET)
             except ValueError:
-                print(RED + "Invalid input. Please enter a valid number" + RESET)
+                print(RED + "Invalid input. Please enter a valid number"
+                      + RESET)
         display_percentage(
             df_raw, groupby_col, user_input, genders[group_input])
 
@@ -154,11 +155,12 @@ def display_percentage(df_raw, groupby_col, question_number, group_value):
     total_responses = len(filtered_df)
     question_responses = filtered_df[question_col].value_counts()
 
-    print(BLUE + f"\nResults for question {question_number}: {df.columns[question_number + 1]}\n" + RESET)
+    print(BLUE + f"\nResults for question {question_number}:"
+          f"{df.columns [question_number + 1]}\n" + RESET)
     print(f"Group: {groupby_col}")
     print(f"Target: {group_value}\n")
     print("Options:")
-    print("-----------------")
+    print("========================")
 
     percentages = question_responses / total_responses * 100
     percentages = percentages.round(2)
@@ -166,8 +168,9 @@ def display_percentage(df_raw, groupby_col, question_number, group_value):
     frecuency = '(' + question_responses.map(str) + ')'
     df_group = pd.DataFrame(
         {'Answers': frecuency, 'Percentage': percentages})
-    
-    df_group['Percentage'] = df_group['Percentage'].apply(lambda x: f"{x:.2f}%")
+
+    df_group['Percentage'] = df_group['Percentage'].apply(
+        lambda x: f"{x:.2f}%")
 
     print(
         BLUE + BACKGROUND + tabulate(df_group, headers='keys', tablefmt='psql')

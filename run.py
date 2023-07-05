@@ -160,8 +160,6 @@ def display_percentage(df_raw, groupby_col, question_number, group_value):
           f"{df.columns [question_number + 1]}\n" + RESET)
     print(f"Group: {groupby_col}")
     print(f"Target: {group_value}\n")
-    print("Options:")
-    print("========================")
 
     percentages = question_responses / total_responses * 100
     percentages = percentages.round(2)

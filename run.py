@@ -89,6 +89,8 @@ def question_selection(df_raw, groupby_col):
     print(WHITE + "Select a question to show the results.\n")
     print("Then press Enter.")
     headers = SHEET.worksheet('predefined_answers').row_values(1)
+    age_groups = SHEET.worksheet('predefined_answers').col_values(1)
+    genders = SHEET.worksheet('predefined_answers').col_values(2)
     num_of_questions = len(df.columns)-2
     for i, header in enumerate(headers[2:], start=1):
         print(YELLOW + f"{i}. {header}" + RESET)
@@ -101,46 +103,76 @@ def question_selection(df_raw, groupby_col):
                       f"between 1 and {num_of_questions}" + RESET)
         except ValueError:
             print(RED + "Invalid input. Please enter a valid number." + RESET)
+    if groupby_col == 'age group':
+        print(YELLOW + "Select an age group:\n" + RESET)
+        for n, age_group in enumerate(age_groups[1:], start=1):
+            print(YELLOW + f"{n}. {age_group}" + RESET)
+        group_input = 0
+        while group_input < 1 or group_input > len(age_groups):
+            try:
+                group_input = int(
+                    input(YELLOW + "\nChoose an option: " + RESET))
+                if group_input < 1 or group_input > len(age_groups):
+                    print(RED + "Invalid choice. Please enter a number" +
+                      f"between 1 and {age_groups}" + RESET)
+            except ValueError:
+                print(
+                    RED + "Invalid input. Please enter a valid number" + RESET)
+        display_percentage(
+            df_raw, groupby_col, user_input, age_groups[group_input])
 
-    display_percentage(df_raw, groupby_col, user_input)
+    elif groupby_col == 'gender':
+        print(YELLOW + "Select a gender:\n" + RESET)
+        for n, gender in enumerate(genders[1:], start=1):
+            print(YELLOW + f"{n}. {gender}" + RESET)
+        group_input = 0
+        while group_input < 1 or group_input > len(genders):
+            try:
+                group_input = int(input(YELLOW + "\nChoose an option: " + RESET))
+                if group_input < 1 or group_input > len(genders):
+                    print(RED + "Invalid choice. Please enter a number" +
+                      f"between 1 and {genders}" + RESET)
+            except ValueError:
+                print(RED + "Invalid input. Please enter a valid number" + RESET)
+        display_percentage(
+            df_raw, groupby_col, user_input, genders[group_input])
 
 
-def display_percentage(df_raw, groupby_col, question):
+def display_percentage(df_raw, groupby_col, question_number, group_value):
     """
-    This function generates a counts column and label_total_by_group
-    column to calculate the percentages of the choosen answer
-    in a table and print the results.
+    Display the results in percentages for a specific question and group.
     """
-    # get all values from the survey_answers sheet
-    question_list = SHEET.worksheet('survey_answers').row_values(1)
-    # sums 1 to variable question to avoid the 0 element in the list
-    question = question + 1
-    # select the question and store the info in df_group variable
-    df_group = df_raw.groupby(
-        [groupby_col, question_list[question]]).size().reset_index()
-    # rename the column 0 to counts in df_group
-    df_group.rename(columns={0: 'counts'}, inplace=True)
-    # Create the label_total_by_group column name
-    label_total_by_group = f'total_by_{groupby_col}'
-    # sums all values for the selected column(group_col)
-    df_group[label_total_by_group] = \
-        df_group.groupby(groupby_col)['counts'].transform(sum)
-    # calculate the percentage for each group
-    df_group['percentage'] = np.round(
-        df_group['counts'] / df_group[label_total_by_group] * 100)
-    # convert the float x number in a percentage string x%
-    df_group['percentage'] = df_group['percentage'].apply(
-        lambda x: f'{int(x)}%')
-    # erase empty columns and fill emty cells in df_group
-    if "" in df_group.columns:
-        df_group.drop(columns="", inplace=True)
-    df_group.fillna('0%', inplace=True)
+    df = df_raw.copy()
+    question_col = df.columns[question_number + 1]
+    filtered_df = df.loc[df[question_col].notna() & df[question_col] != '']
 
-    # prints table with results.
+    if groupby_col == 'age group':
+        filtered_df = filtered_df.loc[filtered_df['age group'] == group_value]
+    elif groupby_col == 'gender':
+        filtered_df = filtered_df.loc[filtered_df['gender'] == group_value]
+
+    total_responses = len(filtered_df)
+    question_responses = filtered_df[question_col].value_counts()
+
+    print(BLUE + f"\nResults for question {question_number}: {df.columns[question_number + 1]}\n" + RESET)
+    print(f"Group: {groupby_col}")
+    print(f"Target: {group_value}\n")
+    print("Options:")
+    print("-----------------")
+
+    percentages = question_responses / total_responses * 100
+    percentages = percentages.round(2)
+
+    frecuency = '(' + question_responses.map(str) + ')'
+    df_group = pd.DataFrame(
+        {'Answers': frecuency, 'Percentage': percentages})
+    
+    df_group['Percentage'] = df_group['Percentage'].apply(lambda x: f"{x:.2f}%")
+
     print(
         BLUE + BACKGROUND + tabulate(df_group, headers='keys', tablefmt='psql')
         + RESET)
-    print("Press Enter to return to previous screen")
+    print('Press Enter to continue...')
     call_survey_results()
 
 

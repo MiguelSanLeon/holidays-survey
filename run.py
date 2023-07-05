@@ -31,7 +31,6 @@ RED = Fore.RED  # red text for error messages
 WHITE = Fore.WHITE  # white text for instructions
 YELLOW = Fore.YELLOW  # yellow text for questions and inputs
 BLUE = Fore.BLUE  # blue text for tables & highlighted text
-BACKGROUND = Back.WHITE  # white background for tables
 RESET = Style.RESET_ALL  # resets the colours
 
 
@@ -173,7 +172,7 @@ def display_percentage(df_raw, groupby_col, question_number, group_value):
         lambda x: f"{x:.2f}%")
 
     print(
-        BLUE + BACKGROUND + tabulate(df_group, headers='keys', tablefmt='psql')
+        BLUE + tabulate(df_group, headers='keys', tablefmt='psql')
         + RESET)
     print('Press Enter to continue...')
     call_survey_results()

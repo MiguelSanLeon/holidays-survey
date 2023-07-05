@@ -116,9 +116,9 @@ def question_selection(df_raw, groupby_col):
             except ValueError:
                 print(
                     RED + "Invalid input. Please enter a valid number" + RESET)
+        clear_screen()
         display_percentage(
             df_raw, groupby_col, user_input, age_groups[group_input])
-        clear_screen()
 
     elif groupby_col == 'gender':
         print(YELLOW + "Select a gender:\n" + RESET)
@@ -135,9 +135,9 @@ def question_selection(df_raw, groupby_col):
             except ValueError:
                 print(RED + "Invalid input. Please enter a valid number"
                       + RESET)
+        clear_screen()
         display_percentage(
             df_raw, groupby_col, user_input, genders[group_input])
-        clear_screen()
 
 
 def display_percentage(df_raw, groupby_col, question_number, group_value):

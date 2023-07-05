@@ -238,11 +238,9 @@ def display_questions_and_options(column, num_options):
         try:
             user_input = int(input(YELLOW + "Enter your choice: " + RESET))
             if user_input < 1 or user_input > num_options:
-                clear_screen()
                 print(RED + "Invalid choice. Please enter a number" +
                             f"between 1 and {num_options}" + RESET)
         except ValueError:
-            clear_screen()
             print(RED + "Invalid input. Please enter a valid number." + RESET)
 
     selected_option = options[user_input - 1]

@@ -31,6 +31,7 @@ RED = Fore.RED  # red text for error messages
 WHITE = Fore.WHITE  # white text for instructions
 YELLOW = Fore.YELLOW  # yellow text for questions and inputs
 BLUE = Fore.BLUE  # blue text for tables & highlighted text
+BRIGHT = Style.BRIGHT # bright text
 RESET = Style.RESET_ALL  # resets the colours
 
 
@@ -56,7 +57,7 @@ def survey_results():
     selection = 0
     while selection != 1 and selection != 2 and selection != 3:
         try:
-            print(WHITE + "Select an option:\n")
+            print(WHITE + BRIGHT + "Select an option:\n")
             print("1 - Show the results by age group.")
             print("2 - Show the results by gender.")
             print("3 - Back to main menu.\n" + RESET)
@@ -89,14 +90,14 @@ def question_selection(df_raw, groupby_col):
     genders = SHEET.worksheet('predefined_answers').col_values(2)
 
     if groupby_col == 'age group':
-        print(YELLOW + "Select an age group:\n" + RESET)
+        print(YELLOW + BRIGHT + "Select an age group:\n" + RESET)
         for n, age_group in enumerate(age_groups[1:], start=1):
-            print(YELLOW + f"{n}. {age_group}" + RESET)
+            print(YELLOW + BRIGHT + f"{n}. {age_group}" + RESET)
         group_input = 0
         while group_input < 1 or group_input > len(age_groups):
             try:
                 group_input = int(
-                    input(YELLOW + "\nChoose an option: " + RESET))
+                    input(YELLOW + BRIGHT +"\nChoose an option: " + RESET))
                 if group_input < 1 or group_input > len(age_groups):
                     print(RED + "Invalid choice. Please enter a number" +
                           f"between 1 and {age_groups}" + RESET)
@@ -108,13 +109,13 @@ def question_selection(df_raw, groupby_col):
         filtered_df = df_raw.loc[df_raw['age group'] == group_value]
 
     elif groupby_col == 'gender':
-        print(YELLOW + "Select a gender:\n" + RESET)
+        print(YELLOW + BRIGHT + "Select a gender:\n" + RESET)
         for n, gender in enumerate(genders[1:], start=1):
-            print(YELLOW + f"{n}. {gender}" + RESET)
+            print(YELLOW + BRIGHT + f"{n}. {gender}" + RESET)
         group_input = 0
         while group_input < 1 or group_input > len(genders):
             try:
-                group_input = int(input(YELLOW + "\nChoose an option: "
+                group_input = int(input(YELLOW + BRIGHT + "\nChoose an option: "
                                   + RESET))
                 if group_input < 1 or group_input > len(genders):
                     print(RED + "Invalid choice. Please enter a number" +
@@ -126,15 +127,15 @@ def question_selection(df_raw, groupby_col):
         group_value = genders[group_input]
         filtered_df = df_raw.loc[df_raw['gender'] == group_value]
 
-    print(WHITE + "Select a question to show the results.\n")
-    print("Then press Enter.")
+    print(WHITE + BRIGHT + "Select a question to show the results.\n")
+    print("Then press Enter." + RESET)
     num_of_questions = len(df.columns)-2
     for i, header in enumerate(headers[2:], start=1):
-        print(YELLOW + f"{i}. {header}" + RESET)
+        print(YELLOW + BRIGHT + f"{i}. {header}" + RESET)
     user_input = 0
     while user_input < 1 or user_input > num_of_questions:
         try:
-            user_input = int(input(YELLOW + "\nEnter your choice: " + RESET))
+            user_input = int(input(YELLOW + BRIGHT + "\nEnter your choice: " + RESET))
             if user_input < 1 or user_input > num_of_questions:
                 print(RED + "Invalid choice. Please enter a number" +
                       f"between 1 and {num_of_questions}" + RESET)
@@ -160,7 +161,7 @@ def display_percentage(df_raw, groupby_col, question_number, group_value):
     total_responses = len(filtered_df)
     question_responses = filtered_df[question_col].value_counts()
 
-    print(BLUE + f"\nResults for question {question_number}:"
+    print(BLUE + BRIGHT + f"\nResults for question {question_number}:"
           f"{df.columns [question_number + 1]}\n" + RESET)
     print(f"Group: {groupby_col}")
     print(f"Target: {group_value}\n")
@@ -176,7 +177,7 @@ def display_percentage(df_raw, groupby_col, question_number, group_value):
         lambda x: f"{x:.2f}%")
 
     print(
-        BLUE + tabulate(df_group, headers='keys', tablefmt='psql')
+        BLUE + BRIGHT + tabulate(df_group, headers='keys', tablefmt='psql')
         + RESET)
     print('Press Enter to continue...')
     call_survey_results()
@@ -196,12 +197,12 @@ def first_selection():
     selection = 0
     while selection != 1 and selection != 2 and selection != 3:
         try:
-            print(BLUE + "MAIN MENU" + RESET)
-            print(WHITE + "Select an option:\n")
+            print(BLUE + BRIGHT + "MAIN MENU" + RESET)
+            print(WHITE + BRIGHT + "Select an option:\n")
             print("1 - Take the Survey.")
             print("2 - View Survey results.")
             print("3 - Exit.\n" + RESET)
-            selection = int(input(YELLOW + "Enter your choice: " + RESET))
+            selection = int(input(YELLOW + BRIGHT + "Enter your choice: " + RESET))
             if selection != 1 and selection != 2 and selection != 3:
                 clear_screen()
                 print(RED + "Invalid choice, please enter 1 or 2" + RESET)
@@ -232,15 +233,15 @@ def display_questions_and_options(column, num_options):
     question = data[0][column - 1]
     options = [row[column - 1]for row in data[1:]]
 
-    print(YELLOW + question + RESET)
+    print(YELLOW + BRIGHT + question + RESET)
     for i, option in enumerate(options, start=1):
-        print(YELLOW + f"{i}. {option}" + RESET)
+        print(YELLOW + BRIGHT + f"{i}. {option}" + RESET)
         if i >= num_options:
             break
     user_input = -1
     while user_input < 1 or user_input > num_options:
         try:
-            user_input = int(input(YELLOW + "Enter your choice: " + RESET))
+            user_input = int(input(YELLOW + BRIGHT + "Enter your choice: " + RESET))
             if user_input < 1 or user_input > num_options:
                 print(RED + "Invalid choice. Please enter a number" +
                             f"between 1 and {num_options}" + RESET)
@@ -248,7 +249,7 @@ def display_questions_and_options(column, num_options):
             print(RED + "Invalid input. Please enter a valid number." + RESET)
 
     selected_option = options[user_input - 1]
-    print(YELLOW + f"You selected: {selected_option}" + RESET)
+    print(YELLOW + BRIGHT + f"You selected: {selected_option}" + RESET)
     user_choices.append(selected_option)
 
 
@@ -288,9 +289,9 @@ def update_survey_answers(data):
     """
     Update the survey_answers worksheet with the data provided by the user.
     """
-    print(WHITE + "Updating the survey results...\n" + RESET)
+    print(WHITE + BRIGHT + "Updating the survey results...\n" + RESET)
     SHEET.worksheet("survey_answers").append_row(data)
-    print(WHITE + "The survey results has been updated\n" + RESET)
+    print(WHITE + BRIGHT + "The survey results has been updated\n" + RESET)
 
 
 def completed_survey_options():
@@ -299,11 +300,11 @@ def completed_survey_options():
     and executes the option that the user requests.
     """
     clear_screen()
-    print(BLUE + "THANK YOU FOR COMPLETING THE SURVEY." + RESET)
-    print(WHITE + "Survey results:")
+    print(BLUE + BRIGHT + "THANK YOU FOR COMPLETING THE SURVEY." + RESET)
+    print(WHITE + BRIGHT + "Survey results:")
     for i, choice in enumerate(user_choices):
         print(f"Question {i + 1}. You answer: {choice}" + RESET)
-    print(BLUE + "\n1- Not happy with your answwers?.Repeat the survey.")
+    print(BLUE + BRIGHT + "\n1- Not happy with your answwers?.Repeat the survey.")
     print("2- Submit your answers and view survey results.")
     print("3- Submit your answers and exit survey." + RESET)
 
@@ -311,7 +312,7 @@ def completed_survey_options():
 
     while user_input < 1 or user_input > 3:
         try:
-            user_input = int(input(YELLOW + "Enter your choice: " + RESET))
+            user_input = int(input(YELLOW + BRIGHT + "Enter your choice: " + RESET))
             if user_input < 1 or user_input > 3:
                 print(RED + "Invalid choice. Please enter a number" +
                             "between 1 and 3" + RESET)
@@ -342,9 +343,9 @@ def welcome():
     print("\n")
     print("\n")
     print("\n")
-    print(BLUE + welcome_message[1] + RESET)
+    print(BLUE + BRIGHT + welcome_message[1] + RESET)
     print("\n")
-    print("                            Loading, please wait...")
+    print(YELLOW + BRIGHT + "                            Loading, please wait...")
     time.sleep(5)
     clear_screen()
     print("\n")
@@ -353,7 +354,7 @@ def welcome():
     print(WHITE + instrucctions[1].upper() + RESET)
     print(WHITE + instrucctions[2].upper() + RESET)
     print("\n")
-    input("                            press Enter to continue")
+    input(YELLOW + BRIGHT + "                            press Enter to continue")
     clear_screen()
     print("\n")
     print("\n")
@@ -363,7 +364,7 @@ def welcome():
     print(WHITE + instrucctions[5].upper() + RESET)
     print(WHITE + instrucctions[6].upper() + RESET)
     print("\n")
-    input("                            press Enter to continue")
+    input(YELLOW + BRIGHT + "                            press Enter to continue")
     clear_screen()
     first_selection()
 
@@ -376,10 +377,10 @@ def goodbye():
     selection = 0
     while selection != 1 and selection != 2:
         try:
-            print(BLUE + "Are you sure you want to exit?" + RESET)
-            print(YELLOW + " 1- YES.")
+            print(BLUE + BRIGHT + "Are you sure you want to exit?" + RESET)
+            print(YELLOW + BRIGHT + " 1- YES.")
             print(" 2- NO." + RESET)
-            selection = int(input(YELLOW + "Enter your choice: " + RESET))
+            selection = int(input(YELLOW + BRIGHT + "Enter your choice: " + RESET))
             if selection != 1 and selection != 2:
                 clear_screen()
                 print(RED + "Invalid choice, please enter 1 or 2" + RESET)
@@ -389,7 +390,7 @@ def goodbye():
     clear_screen()
     if selection == 1:
         goodbye_message = SHEET.worksheet('other_text').col_values(3)
-        print(BLUE + goodbye_message[1] + RESET)
+        print(BLUE + BRIGHT + goodbye_message[1] + RESET)
         time.sleep(3)
         exit()
     else:

@@ -31,7 +31,7 @@ RED = Fore.RED  # red text for error messages
 WHITE = Fore.WHITE  # white text for instructions
 YELLOW = Fore.YELLOW  # yellow text for questions and inputs
 BLUE = Fore.BLUE  # blue text for tables & highlighted text
-BRIGHT = Style.BRIGHT # bright text
+BRIGHT = Style.BRIGHT  # bright text
 RESET = Style.RESET_ALL  # resets the colours
 
 
@@ -97,7 +97,7 @@ def question_selection(df_raw, groupby_col):
         while group_input < 1 or group_input > len(age_groups):
             try:
                 group_input = int(
-                    input(YELLOW + BRIGHT +"\nChoose an option: " + RESET))
+                    input(YELLOW + BRIGHT + "\nChoose an option: " + RESET))
                 if group_input < 1 or group_input > len(age_groups):
                     print(RED + "Invalid choice. Please enter a number" +
                           f"between 1 and {age_groups}" + RESET)
@@ -115,8 +115,8 @@ def question_selection(df_raw, groupby_col):
         group_input = 0
         while group_input < 1 or group_input > len(genders):
             try:
-                group_input = int(input(YELLOW + BRIGHT + "\nChoose an option: "
-                                  + RESET))
+                group_input = int(input(YELLOW + BRIGHT +
+                                  "\nChoose an option: " + RESET))
                 if group_input < 1 or group_input > len(genders):
                     print(RED + "Invalid choice. Please enter a number" +
                           f"between 1 and {genders}" + RESET)
@@ -135,7 +135,8 @@ def question_selection(df_raw, groupby_col):
     user_input = 0
     while user_input < 1 or user_input > num_of_questions:
         try:
-            user_input = int(input(YELLOW + BRIGHT + "\nEnter your choice: " + RESET))
+            user_input = int(input(YELLOW + BRIGHT +
+                                   "\nEnter your choice: " + RESET))
             if user_input < 1 or user_input > num_of_questions:
                 print(RED + "Invalid choice. Please enter a number" +
                       f"between 1 and {num_of_questions}" + RESET)
@@ -202,7 +203,8 @@ def first_selection():
             print("1 - Take the Survey.")
             print("2 - View Survey results.")
             print("3 - Exit.\n" + RESET)
-            selection = int(input(YELLOW + BRIGHT + "Enter your choice: " + RESET))
+            selection = int(input(YELLOW + BRIGHT +
+                                  "Enter your choice: " + RESET))
             if selection != 1 and selection != 2 and selection != 3:
                 clear_screen()
                 print(RED + "Invalid choice, please enter 1 or 2" + RESET)
@@ -241,7 +243,8 @@ def display_questions_and_options(column, num_options):
     user_input = -1
     while user_input < 1 or user_input > num_options:
         try:
-            user_input = int(input(YELLOW + BRIGHT + "Enter your choice: " + RESET))
+            user_input = int(input(YELLOW + BRIGHT +
+                             "Enter your choice: " + RESET))
             if user_input < 1 or user_input > num_options:
                 print(RED + "Invalid choice. Please enter a number" +
                             f"between 1 and {num_options}" + RESET)
@@ -304,7 +307,8 @@ def completed_survey_options():
     print(WHITE + BRIGHT + "Survey results:")
     for i, choice in enumerate(user_choices):
         print(f"Question {i + 1}. You answer: {choice}" + RESET)
-    print(BLUE + BRIGHT + "\n1- Not happy with your answwers?.Repeat the survey.")
+    print(BLUE + BRIGHT +
+          "\n1- Not happy with your answwers?.Repeat the survey.")
     print("2- Submit your answers and view survey results.")
     print("3- Submit your answers and exit survey." + RESET)
 
@@ -312,7 +316,8 @@ def completed_survey_options():
 
     while user_input < 1 or user_input > 3:
         try:
-            user_input = int(input(YELLOW + BRIGHT + "Enter your choice: " + RESET))
+            user_input = int(input(YELLOW + BRIGHT +
+                             "Enter your choice: " + RESET))
             if user_input < 1 or user_input > 3:
                 print(RED + "Invalid choice. Please enter a number" +
                             "between 1 and 3" + RESET)
@@ -345,7 +350,8 @@ def welcome():
     print("\n")
     print(BLUE + BRIGHT + welcome_message[1] + RESET)
     print("\n")
-    print(YELLOW + BRIGHT + "                            Loading, please wait...")
+    print(YELLOW + BRIGHT +
+          "                            Loading, please wait...")
     time.sleep(5)
     clear_screen()
     print("\n")
@@ -354,7 +360,8 @@ def welcome():
     print(WHITE + instrucctions[1].upper() + RESET)
     print(WHITE + instrucctions[2].upper() + RESET)
     print("\n")
-    input(YELLOW + BRIGHT + "                            press Enter to continue")
+    input(YELLOW + BRIGHT +
+          "                            press Enter to continue")
     clear_screen()
     print("\n")
     print("\n")
@@ -364,7 +371,8 @@ def welcome():
     print(WHITE + instrucctions[5].upper() + RESET)
     print(WHITE + instrucctions[6].upper() + RESET)
     print("\n")
-    input(YELLOW + BRIGHT + "                            press Enter to continue")
+    input(YELLOW + BRIGHT +
+          "                            press Enter to continue")
     clear_screen()
     first_selection()
 
@@ -380,7 +388,8 @@ def goodbye():
             print(BLUE + BRIGHT + "Are you sure you want to exit?" + RESET)
             print(YELLOW + BRIGHT + " 1- YES.")
             print(" 2- NO." + RESET)
-            selection = int(input(YELLOW + BRIGHT + "Enter your choice: " + RESET))
+            selection = int(input(YELLOW + BRIGHT +
+                            "Enter your choice: " + RESET))
             if selection != 1 and selection != 2:
                 clear_screen()
                 print(RED + "Invalid choice, please enter 1 or 2" + RESET)

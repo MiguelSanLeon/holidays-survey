@@ -399,7 +399,10 @@ def goodbye():
     clear_screen()
     if selection == 1:
         goodbye_message = SHEET.worksheet('other_text').col_values(3)
-        print(BLUE + BRIGHT + goodbye_message[1] + RESET)
+        clear_screen()
+        print("\n")
+        print("\n")
+        print(BLUE + BRIGHT + "          " + goodbye_message[1] + RESET)
         time.sleep(3)
         exit()
     else:

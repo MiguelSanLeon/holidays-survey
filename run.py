@@ -357,7 +357,7 @@ def welcome():
     print("\n")
     print("\n")
     print("\n")
-    print(WHITE + instrucctions[1].upper() + RESET)
+    print(WHITE + instrucctions[1].upper())
     print(WHITE + instrucctions[2].upper() + RESET)
     print("\n")
     input(YELLOW + BRIGHT +

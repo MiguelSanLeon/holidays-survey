@@ -402,7 +402,8 @@ def goodbye():
         clear_screen()
         print("\n")
         print("\n")
-        print(BLUE + BRIGHT + "          " + goodbye_message[1] + RESET)
+        print("\n")
+        print(BLUE + BRIGHT + goodbye_message[1] + RESET)
         time.sleep(3)
         exit()
     else:

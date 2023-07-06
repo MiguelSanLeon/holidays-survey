@@ -84,23 +84,10 @@ def question_selection(df_raw, groupby_col):
     This function allows the user to choose between the different
     questions and apply filters to selection.
     """
-    print(WHITE + "Select a question to show the results.\n")
-    print("Then press Enter.")
     headers = SHEET.worksheet('predefined_answers').row_values(1)
     age_groups = SHEET.worksheet('predefined_answers').col_values(1)
     genders = SHEET.worksheet('predefined_answers').col_values(2)
-    num_of_questions = len(df.columns)-2
-    for i, header in enumerate(headers[2:], start=1):
-        print(YELLOW + f"{i}. {header}" + RESET)
-    user_input = 0
-    while user_input < 1 or user_input > num_of_questions:
-        try:
-            user_input = int(input(YELLOW + "\nEnter your choice: " + RESET))
-            if user_input < 1 or user_input > num_of_questions:
-                print(RED + "Invalid choice. Please enter a number" +
-                      f"between 1 and {num_of_questions}" + RESET)
-        except ValueError:
-            print(RED + "Invalid input. Please enter a valid number." + RESET)
+
     if groupby_col == 'age group':
         print(YELLOW + "Select an age group:\n" + RESET)
         for n, age_group in enumerate(age_groups[1:], start=1):
@@ -117,8 +104,8 @@ def question_selection(df_raw, groupby_col):
                 print(
                     RED + "Invalid input. Please enter a valid number" + RESET)
         clear_screen()
-        display_percentage(
-            df_raw, groupby_col, user_input, age_groups[group_input])
+        group_value = age_groups[group_input]
+        filtered_df = df_raw.loc[df_raw['age group'] == group_value]
 
     elif groupby_col == 'gender':
         print(YELLOW + "Select a gender:\n" + RESET)
@@ -136,8 +123,25 @@ def question_selection(df_raw, groupby_col):
                 print(RED + "Invalid input. Please enter a valid number"
                       + RESET)
         clear_screen()
-        display_percentage(
-            df_raw, groupby_col, user_input, genders[group_input])
+        group_value = genders[group_input]
+        filtered_df = df_raw.loc[df_raw['gender'] == group_value]
+
+    print(WHITE + "Select a question to show the results.\n")
+    print("Then press Enter.")
+    num_of_questions = len(df.columns)-2
+    for i, header in enumerate(headers[2:], start=1):
+        print(YELLOW + f"{i}. {header}" + RESET)
+    user_input = 0
+    while user_input < 1 or user_input > num_of_questions:
+        try:
+            user_input = int(input(YELLOW + "\nEnter your choice: " + RESET))
+            if user_input < 1 or user_input > num_of_questions:
+                print(RED + "Invalid choice. Please enter a number" +
+                      f"between 1 and {num_of_questions}" + RESET)
+        except ValueError:
+            print(RED + "Invalid input. Please enter a valid number." + RESET)
+    question_number = user_input
+    display_percentage(filtered_df, groupby_col, question_number, group_value)
 
 
 def display_percentage(df_raw, groupby_col, question_number, group_value):
@@ -148,10 +152,10 @@ def display_percentage(df_raw, groupby_col, question_number, group_value):
     question_col = df.columns[question_number + 1]
     filtered_df = df.loc[df[question_col].notna() & df[question_col] != '']
 
-    if groupby_col == 'age group':
-        filtered_df = filtered_df.loc[filtered_df['age group'] == group_value]
-    elif groupby_col == 'gender':
-        filtered_df = filtered_df.loc[filtered_df['gender'] == group_value]
+    # if groupby_col == 'age group':
+    #    filtered_df = filtered_df.loc[filtered_df['age group'] == group_value]
+    # elif groupby_col == 'gender':
+    #    filtered_df = filtered_df.loc[filtered_df['gender'] == group_value]
 
     total_responses = len(filtered_df)
     question_responses = filtered_df[question_col].value_counts()

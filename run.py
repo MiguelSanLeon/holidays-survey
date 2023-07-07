@@ -326,7 +326,7 @@ def completed_survey_options():
     print(BLUE + BRIGHT + "THANK YOU FOR COMPLETING THE SURVEY." + RESET)
     print(WHITE + BRIGHT + "Survey results:")
     for i, choice in enumerate(user_choices):
-        print(f"Question {i + 1}. You answer: {choice}" + RESET)
+        print(f"Question {i + 1}. You answer: {choice}")
     print(BLUE + BRIGHT +
           "\n1- Not happy with your answwers?.Repeat the survey.")
     print("2- Submit your answers and view survey results.")

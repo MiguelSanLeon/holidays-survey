@@ -286,11 +286,11 @@ Deployment to Heroku was completed using the following steps:
 
 ### Content
 
-    - All content was originally created and written by Miguel Angel Sanchez Leon, the developer.
+- All content was originally created and written by Miguel Angel Sanchez Leon, the developer.
 
 ### Media
 
-    - [Patorjk ASCII Art Generator](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) This web was used to generate the Title, welcome and goodbye messages.
+- [Patorjk ASCII Art Generator](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) This web was used to generate the Title, welcome and goodbye messages.
 
 ### Code
 

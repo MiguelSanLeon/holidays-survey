@@ -51,7 +51,7 @@ def clear_screen():
 
 def survey_results():
     """
-    This function allows the user to filter the results by age 
+    This function allows the user to filter the results by age
     group or gender, or exit to main menu.
     """
     selection = 0
@@ -82,7 +82,7 @@ def survey_results():
 
 def question_selection(df_raw, groupby_col):
     """
-    This function allows the user to select an age group or 
+    This function allows the user to select an age group or
     gender, depending on the previous choice and choose between
     the different questions and apply filters to selection.
     """

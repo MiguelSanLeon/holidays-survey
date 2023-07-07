@@ -16,12 +16,12 @@ The project can be viewed here: https://holiday-survey-87184cd3dbf0.herokuapp.co
     - [Data Model](#data-model)
     - [Flowchart](#flowchart)
 2. [Features](#features)
-    - [Title screen](#title-screen)
-    - [Main menu](#main-menu)
-    - [Taking the survey](#taking-the-survey)
-    - [Retake survey or show results](#retake-survey-or-show-results)
-    - [View results](#view-results)
-    - [Exit screen](#exit-screen)
+    - [Title Screen](#title-screen)
+    - [Main Menu](#main-menu)
+    - [Taking the Survey](#taking-the-survey)
+    - [Retake Survey or Show Results](#retake-survey-or-show-results)
+    - [View Results](#view-results)
+    - [Exit Screen](#exit-screen)
 3. [Technololgies Used](#technologies-used)
     - [Languages](#languages)
     - [Frameworks, Libraries and Programmes](#frameworks-libraries-and-programmes)
@@ -79,6 +79,24 @@ This is the Google sheet used to store questions and options.
 This is the Google sheet used to store the Title, welcome message and goodbye message.
 ![other_text](assets/readme-files/other-text-worksheet.png)
 
+### Flowchart
+
+[Diagrams](https://app.diagrams.net/) was used to create the original flowchart for the project.
+During the development process, more options and input validations were included that are not in the original flowchart.
+![Flowchart](assets/readme-files/flowchart.jpg)
+
+## Features
+
+### Title Screen
+
+- This screen shows the name of the survey.
+![Title Screen](assets/readme-files/title-screen.png)
+
+- This is the welcome screen and shows an introductory message.
+![First Presentation Screen](assets/readme-files/first-presentation-screen.png)
+
+- This screen shows more information about the program features.
+![Second Presentation Screen](assets/readme-files/second-presentation-screen.png)
 
 
 

@@ -1,11 +1,12 @@
 # Holidays Survey
 
-![Holidays Survey mockup](/assets/readme-files/main-image.png)
+![Holidays Survey mock up](/assets/readme-files/main-image.png)
 
 This python project generates a survey (a holiday survey by default) and then displays the results by applying filters based on the age group and gender questions.
 The most remarkable feature about the project is the ability to configure the entire survey from the linked google sheet, from the title, the introductory messages, the questions and answers, to the goodbye message.
 
-All changes can be done just changing linked cells in the google sheet.
+All changes can be done just changing linked cells in the 
+Google sheet.
 
 The project can be viewed here: https://holiday-survey-87184cd3dbf0.herokuapp.com/
 
@@ -22,7 +23,7 @@ The project can be viewed here: https://holiday-survey-87184cd3dbf0.herokuapp.co
     - [Retake Survey or Show Results](#retake-survey-or-show-results)
     - [View Results](#view-results)
     - [Exit Screen](#exit-screen)
-3. [Technololgies Used](#technologies-used)
+3. [Technologies Used](#technologies-used)
     - [Languages](#languages)
     - [Frameworks, Libraries and Programmes](#frameworks-libraries-and-programmes)
 4. [Testing](#testing)
@@ -62,11 +63,11 @@ The project can be viewed here: https://holiday-survey-87184cd3dbf0.herokuapp.co
 
 The program uses a Google sheet to store the information collected from the survey.
 
-The google sheet also contains the questions as the column head, and the possible answers listed within each column.
+The Google sheet also contains the questions as the column head, and the possible answers listed within each column.
 
 The Title, welcome message and goodbye message are also stored in the Google sheet.
 
-A pandas dataframe is used to display the results tables.
+A pandas data frame is used to display the results tables.
 
 There is a user_choices variable that store the user answers in a list. There is a survey_questions variable that store questions as key and options list as values in a dictionary.
 
@@ -76,7 +77,7 @@ This is the Google sheet used to store the data.
 This is the Google sheet used to store questions and options.
 ![predefined_answers](assets/readme-files/predefined-answers-worksheet.png)
 
-This is the Google sheet used to store the Title, welcome message and goodbye message.
+This is the Google sheet used to store the title, welcome message and goodbye message.
 ![other_text](assets/readme-files/other-text-worksheet.png)
 
 ### Flowchart
@@ -133,13 +134,13 @@ During the development process, more options and input validations were included
 
 ![Survey results](assets/readme-files/survey-results.png)
 
-- In case the user choose options 2 or 3 the programs shows the update survey screen. It also alows the user to apply the first filter selection.
+- In case the user choose options 2 or 3 the programs shows the update survey screen. It also allows the user to apply the first filter selection.
 
 ![Update survey screen](assets/readme-files/update-survey-screen.png)
 
 ### View Results
 
-- This section gives the user the option to filter the results by age group or gender. The user can also come back to main menu from this screen. 
+- This section gives the user the option to filter the results by age group or gender. The user can also come back to the main menu from this screen. 
 
 ![First filter selection](assets/readme-files/first-filter-selection.png)
 
@@ -153,7 +154,7 @@ During the development process, more options and input validations were included
 
 ![Question selection](assets/readme-files/question-selection.png)
 
-- Once the user select the last filter the program shows a table with the survey results applying the choosen filters.
+- Once the user select the last filter, the program shows a table with the survey results applying the chosen filters.
 
 ![Result table](assets/readme-files/results-table.png)
 
@@ -161,7 +162,7 @@ During the development process, more options and input validations were included
 
 ### Exit Screen
 
-- If the user choose to exit from any menu on the program, the exit confirmation screen will appear.
+- If the user chooses to exit from any menu on the program, the exit confirmation screen will appear.
 ![Exit menu](assets/readme-files/exit-menu.png)
 
 - When the user chooses NO, he/she will return to main menu.
@@ -177,11 +178,11 @@ During the development process, more options and input validations were included
 
 ### Frameworks, Libraries and Programmes
 - [Diagrams](https://app.diagrams.net): this was used to create a flowchart in the planning stage of the project.
-- [Colorama](https://pypi.org/project/colorama/): this was used to add colour to the terminal to improve UX and readibility.
+- [Colorama](https://pypi.org/project/colorama/): this was used to add colour to the terminal to improve UX and readability.
 - [Tabulate](https://pypi.org/project/tabulate/): this was used to display data in tables. 
-- [Pandas](https://pypi.org/project/pandas/): this was used to store and analyse survey data using dataframes.
-- [Numpy](https://pypi.org/project/numpy/): this was used to analyse survey data.
-- [Gspread](https://docs.gspread.org/en/v5.7.0/): this is the API for Google Sheets which stores the survey data. 
+- [Pandas](https://pypi.org/project/pandas/): this was used to store and analyse survey data using data frames.
+- [NumPy](https://pypi.org/project/numpy/): this was used to analyse survey data.
+- [Gspread](https://docs.gspread.org/en/v5.7.0/): this is the API for Google sheets, which stores the survey data. 
 - [Codeanywhere](https://app.codeanywhere.com): this was used to write, commit and push the code to GitHub. 
 - [GitHub](https://github.com/): this was used to store the project and for version control.
 - [Heroku](https://dashboard.heroku.com/login): this was used to host and deploy the finished project.
@@ -201,7 +202,7 @@ During the development process, more options and input validations were included
 - As a user, I would like to be able to see the survey result filtered by age group or gender.
     - The survey results can be filtered by age group or gender.
 - As a user, I would like to be able to choose which age group or gender I want to see the results of.
-    - The results can be filtered by male of female and by age group.
+    - The results can be filtered by male or female and by age group.
 - As a user, I would like to be able to see different filtered result before exit.
     - The program allows the user to do as many result tables as he/she wishes before exit.
 
@@ -222,8 +223,8 @@ TEST       | DESIRED RESULT          | PASS/FAIL |
 ---------- | ----------------------- | --------- |
 Title screen | When the program runs, the Title screen is displayed and stay for 5 seconds | PASS
 Welcome message | When Title screen closes, the welcome message is displayed and the user must press Enter to continue | PASS
-Second presentation screen | When the user press Enter the second presentation screen is displayed and the user must press Enter again to continue. | PASS
-Main Menu | When the user press Enter the Main Menu is displayed with 3 options, 1- take survey, 2 - View Survey Results and 3- Exit. typing the choosen option takes you to the right screen. | PASS
+Second presentation screen | When the user press Enter, the second presentation screen is displayed and the user must press Enter again to continue. | PASS
+Main Menu | When the user press Enter the Main Menu is displayed with 3 options, 1- take survey, 2 - View Survey Results and 3- Exit. Typing the chosen option takes you to the right screen. | PASS
 Age group question | When typing option 1 in Main menu the survey starts and show the age group question with 6 options, all of them shows a message with the selected option after typing it and takes you to the next question. | PASS
 Gender question | There are 2 options, the 2 of them shows a message with the selected option after typing it and takes you to the next question. | PASS
 Mate question | This question shows 4 options, all of them shows a message with the selected option after typing it and takes you to the next question. | PASS
@@ -235,26 +236,26 @@ The most question | this question shows 8 options, all of them shows a message w
 The least question | this question shows 9 options, all of them shows a message with the selected option after typing it and takes you to the next question. | PASS
 Recommend question | this question shows 2 options, all of them shows a message with the selected option after typing it and takes you to the next question. | PASS
 Survey results screen | This screen shows a thanks message and a list with all the user's answers. Then displays a menu with 3 options, 1- Repeat the survey, 2- submit and view results and 3-submit and exit, all options works as expected. | PASS
-Update survey result screen | This screen displays an updating message and a second message when the survey has been updated. Then shows the survey results menu to choose between filter by age group or gender or exit, all options works as expected. In case the user choose to exit after submit in the previous screen the program will show the exit menu with 2 options, both working as expected | PASS
+Update survey result screen | This screen displays an updating message and a second message when the survey has been updated. Then shows the survey results menu to choose between filter by age group or gender or exit, all options works as expected. In case the user choose to exit after submit in the previous screen, the program will show the exit menu with 2 options, both working as expected | PASS
 Age group selection | This screen show a message on top to shows that the user is in the survey results section and then show the 6 options to filter by age group, all of them working as expected | PASS
 Gender selection | This screen show a message on top to shows that the user is in the survey results section and then show the 2 options to filter by gender, all of them working as expected | PASS
 Question selection | This screen show a message on top to shows that the user is in the survey results section and then show the 8 options to filter by question, all of them working as expected | PASS
-Results table | When the user choose between the questions, the program displays a result table with the filters requested showing all the options choosen by the surveyed people, the number of times that option was choosen and the percentage of the total that number represents. To continue to the next screen the user must press Enter | PASS
-Exit menu | When the user choose to exit, the program display a 2 options menu, both of them working as expected | PASS
-Goodbye message | When the user choose YES in the exit menu, the program display a goodbye message and then exit. | PASS
+Results table | When the user chooses between the questions, the program displays a result table with the filters requested showing all the options chosen by the surveyed people, the number of times that option was choosen and the percentage of the total that number represents. To continue to the next screen, the user must press Enter | PASS
+Exit menu | When the user chooses to exit, the program displays a 2 options menu, both of them working as expected | PASS
+Goodbye message | When the user chooses YES in the exit menu, the program displays a goodbye message and then exit. | PASS
 
 ## Bugs
 
 1. Lack of exit option in main menu:
-    - I noticed that there was no exit option in the main menu so when returning to it, it was not possible to exit the program without taking the survey again. An exit choice was added to the main menu.
+    - I noticed that there was no exit option in the main menu, so when returning to it, it was not possible to exit the program without taking the survey again. An exit choice was added to the main menu.
 2. Questions for filters in wrong order:
-    - When I decided to implement a second filter to show only an specific age group or an specific gender, the program ask first to filter by age group or gender, secondly filter by question and then choose which age group or which gender. I had to restructure the function question_selection to solve the problem.
-3. Color text bugs:
-    - For some text I had to fix the colors and add brightness to some of them for a better display.
+    - When I decided to implement a second filter to show only a specific age group or a specific gender, the program asks first to filter by age group or gender, secondly filter by question and then choose which age group or which gender. I had to restructure the function question_selection to solve the problem.
+3. Colour text bugs:
+    - For some text, I had to fix the colours and add brightness to some of them for a better display.
 
 ## Deployment
 
-The program was developed in Codeanywhere. It was then commited and pushed to GitHub.
+The program was developed in Codeanywhere. It was then committed and pushed to GitHub.
 The finished project was deployed in Heroku using the Code Institute Python Terminal for display purposes. 
 Deployment to Heroku was completed using the following steps: 
 1. Run 'pip3 freeze > requirements.txt' in the terminal to add a list of dependencies to requirements.txt
@@ -294,10 +295,10 @@ Deployment to Heroku was completed using the following steps:
 ### Code
 
 - [GeekforGeeks](https://www.geeksforgeeks.org/clear-screen-python/) was used to implement a clear screen code.
-- [Data analysis with Python](https://apps.cognitiveclass.ai/learning/course/course-v1:CognitiveClass+DA0101EN+v2/home) I took this course during the developing process to have a better understanding of how to use pandas and dataframes.
+- [Data analysis with Python](https://apps.cognitiveclass.ai/learning/course/course-v1:CognitiveClass+DA0101EN+v2/home) I took this course during the developing process to have a better understanding of how to use pandas and data frames.
 
 ## Acknowledgements
 
-- Many thanks to my mentor Marcel that has been a light at the end of the tunnel and a great adviser during the development process.
+- Many thanks to my mentor Marcel, that has been a light at the end of the tunnel and a great adviser during the development process.
 - Thanks to the slack community that is always ready to help.
 - Thanks to Code Institute for instructing me and teaching me everything necessary for this project.

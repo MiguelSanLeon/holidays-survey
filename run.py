@@ -57,6 +57,7 @@ def survey_results():
     selection = 0
     while selection != 1 and selection != 2 and selection != 3:
         try:
+            print(BLUE + BRIGHT + "*** SURVEY RESULTS ***\n")
             print(WHITE + BRIGHT + "Select an option:\n")
             print("1 - Show the results by age group.")
             print("2 - Show the results by gender.")
@@ -95,6 +96,7 @@ def question_selection(df_raw, groupby_col):
     # Generate age group selection from age_groups variable
 
     if groupby_col == 'age group':
+        print(BLUE + BRIGHT + "*** SURVEY RESULTS ***\n")
         print(YELLOW + BRIGHT + "Select an age group:\n" + RESET)
         for n, age_group in enumerate(age_groups[1:], start=1):
             print(YELLOW + BRIGHT + f"{n}. {age_group}" + RESET)
@@ -116,6 +118,7 @@ def question_selection(df_raw, groupby_col):
     # Generate gender selection from genders variable
 
     elif groupby_col == 'gender':
+        print(BLUE + BRIGHT + "*** SURVEY RESULTS ***\n")
         print(YELLOW + BRIGHT + "Select a gender:\n" + RESET)
         for n, gender in enumerate(genders[1:], start=1):
             print(YELLOW + BRIGHT + f"{n}. {gender}" + RESET)
@@ -136,6 +139,7 @@ def question_selection(df_raw, groupby_col):
 
     # Generate question selection from headers variable
 
+    print(BLUE + BRIGHT + "*** SURVEY RESULTS ***\n")
     print(WHITE + BRIGHT + "Select a question to show the results.\n")
     print("Then press Enter." + RESET)
     num_of_questions = len(df.columns)-2

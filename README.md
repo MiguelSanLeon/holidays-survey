@@ -93,11 +93,48 @@ During the development process, more options and input validations were included
 ![Title Screen](assets/readme-files/title-screen.png)
 
 - This is the welcome screen and shows an introductory message.
+- The user needs to press enter to continue to next screen.
 ![First Presentation Screen](assets/readme-files/first-presentation-screen.png)
 
 - This screen shows more information about the program features.
+- The user needs to press enter to continue to next screen.
 ![Second Presentation Screen](assets/readme-files/second-presentation-screen.png)
 
+### Main Menu
 
+- This screen shows the survey main menu that gives the user three options:
+    - Take the survey
+    - View the results
+    - Exit
+
+![Main Menu](assets/readme-files/main-menu.png)
+
+### Taking the Survey
+
+- This part of the program shows all the questions with the options below and the message "Enter your choice:" 
+
+![Age group question](assets/readme-files/age_group-question.png)
+![Gender question](assets/readme-files/gender-question.png)
+![Mate question](assets/readme-files/mate-question.png)
+![Season question](assets/readme-files/season-question.png)
+![Continent question](assets/readme-files/continent-question.png)
+![Country question](assets/readme-files/country-question.png)
+![Places question](assets/readme-files/places-question.png)
+![The most question](assets/readme-files/the-most-question.png)
+![The least question](assets/readme-files/the-least-question.png)
+![Recommend question](assets/readme-files/recommend-question.png)
+
+### Retake Survey or Show Results
+
+- This screen thanks the user for taking the survey, then show the results and give three options:
+    - Repeat the survey
+    - Submit the answers and show the survey results
+    - Submit the answers and exit
+
+![Survey results](assets/readme-files/survey-results.png)
+
+### View Results
+
+- This section 
 
 

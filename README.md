@@ -133,8 +133,60 @@ During the development process, more options and input validations were included
 
 ![Survey results](assets/readme-files/survey-results.png)
 
+- In case the user choose options 2 or 3 the programs shows the update survey screen. It also alows the user to apply the first filter selection.
+
+![Update survey screen](assets/readme-files/update-survey-screen.png)
+
 ### View Results
 
-- This section 
+- This section gives the user the option to filter the results by age group or gender. The user can also come back to main menu from this screen. 
 
+![First filter selection](assets/readme-files/first-filter-selection.png)
+
+- This screen shows the second filter selection in order to select which age group or gender the user choose to apply the second filter.
+    - For age group.
+    ![Age group selection](assets/readme-files/age_group-selection.png)
+    - For gender.
+    ![Gender selection](assets/readme-files/gender-selection.png)
+
+- After the filter selection, the user can select a question from the survey to display the results.
+
+![Question selection](assets/readme-files/question-selection.png)
+
+- Once the user select the last filter the program shows a table with the survey results applying the choosen filters.
+
+![Result table](assets/readme-files/results-table.png)
+
+- Each time a table is displayed, the user must press a key that will return him/her to the first filter selection screen.
+
+### Exit Screen
+
+- If the user choose to exit from any menu on the program, the exit confirmation screen will appear.
+![Exit menu](assets/readme-files/exit-menu.png)
+
+- When the user chooses NO, he/she will return to main menu.
+
+- When the user chooses YES, the goodbye message will appear.
+![Goodbye message](assets/readme-files/goodbye-message.png)
+
+## Technologies Used
+
+### Languages
+
+- Python
+
+### Frameworks, Libraries and Programmes
+- [Diagrams](https://app.diagrams.net): this was used to create a flowchart in the planning stage of the project.
+- [Colorama](https://pypi.org/project/colorama/): this was used to add colour to the terminal to improve UX and readibility.
+- [Tabulate](https://pypi.org/project/tabulate/): this was used to display data in tables. 
+- [Pandas](https://pypi.org/project/pandas/): this was used to store and analyse survey data using dataframes.
+- [Numpy](https://pypi.org/project/numpy/): this was used to analyse survey data.
+- [Gspread](https://docs.gspread.org/en/v5.7.0/): this is the API for Google Sheets which stores the survey data. 
+- [Codeanywhere](https://app.codeanywhere.com): this was used to write, commit and push the code to GitHub. 
+- [GitHub](https://github.com/): this was used to store the project and for version control.
+- [Heroku](https://dashboard.heroku.com/login): this was used to host and deploy the finished project.
+
+## Testing
+
+### Testing User Stories
 

@@ -42,10 +42,10 @@ The project can be viewed here: https://holiday-survey-87184cd3dbf0.herokuapp.co
 ### Project Goals
 
 - Collect user answer for survey.
-- Store data in a google sheet.
+- Store data in a Google sheet.
 - Show survey result in a convenient format.
 - show the questions and results in a tidy and clear way.
-- Get a 100% reconfigurable format from the google sheet file.
+- Get a 100% reconfigurable format from the Google sheet file.
 - Implement data validation for all inputs.
 
 ### User Stories
@@ -60,11 +60,24 @@ The project can be viewed here: https://holiday-survey-87184cd3dbf0.herokuapp.co
 
 ### Data Model
 
-The program uses a google sheet to store the information collected from the survey.
+The program uses a Google sheet to store the information collected from the survey.
 
 The google sheet also contains the questions as the column head, and the possible answers listed within each column.
 
+The Title, welcome message and goodbye message are also stored in the Google sheet.
+
 A pandas dataframe is used to display the results tables.
+
+There is a user_choices variable that store the user answers in a list. There is a survey_questions variable that store questions as key and options list as values in a dictionary.
+
+This is the Google sheet used to store the data.
+![survey_answers](assets/readme-files/survey-answers-worksheet.png)
+
+This is the Google sheet used to store questions and options.
+![predefined_answers](assets/readme-files/predefined-answers-worksheet.png)
+
+This is the Google sheet used to store the Title, welcome message and goodbye message.
+![other_text](assets/readme-files/other-text-worksheet.png)
 
 
 

@@ -45,7 +45,7 @@ The project can be viewed here: https://holiday-survey-87184cd3dbf0.herokuapp.co
 - Collect user answer for survey.
 - Store data in a Google sheet.
 - Show survey result in a convenient format.
-- show the questions and results in a tidy and clear way.
+- Show the questions and results in a tidy and clear way.
 - Get a 100% reconfigurable format from the Google sheet file.
 - Implement data validation for all inputs.
 

@@ -65,7 +65,7 @@ def survey_results():
             selection = int(input(YELLOW + "Enter your choice: " + RESET))
             if selection != 1 and selection != 2 and selection != 3:
                 clear_screen()
-                print(RED + "Invalid choice, please enter 1 or 2" + RESET)
+                print(RED + "Invalid choice, please enter 1, 2 or 3" + RESET)
         except ValueError:
             clear_screen()
             print(RED + "Invalid input, please enter a valid number" + RESET)
@@ -167,11 +167,6 @@ def display_percentage(df_raw, groupby_col, question_number, group_value):
     question_col = df.columns[question_number + 1]
     filtered_df = df.loc[df[question_col].notna() & df[question_col] != '']
 
-    # if groupby_col == 'age group':
-    #    filtered_df = filtered_df.loc[filtered_df['age group'] == group_value]
-    # elif groupby_col == 'gender':
-    #    filtered_df = filtered_df.loc[filtered_df['gender'] == group_value]
-
     total_responses = len(filtered_df)
     question_responses = filtered_df[question_col].value_counts()
 
@@ -224,7 +219,7 @@ def first_selection():
                                   "Enter your choice: " + RESET))
             if selection != 1 and selection != 2 and selection != 3:
                 clear_screen()
-                print(RED + "Invalid choice, please enter 1 or 2" + RESET)
+                print(RED + "Invalid choice, please enter 1, 2 or 3" + RESET)
         except ValueError:
             clear_screen()
             print(RED + "Invalid input, please enter a valid number" + RESET)

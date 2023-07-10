@@ -90,10 +90,10 @@ During the development process, more options and input validations were included
 
 ### Title Screen
 
-- This screen shows the name of the survey.
+- This screen shows the name of the survey and it also has a loading message to keep the user waiting during the process.
 ![Title Screen](assets/readme-files/title-screen.png)
 
-- This is the welcome screen and shows an introductory message.
+- This is the welcome screen and shows an introductory message which provides more details about the purpose of the program.
 - The user needs to press enter to continue to next screen.
 ![First Presentation Screen](assets/readme-files/first-presentation-screen.png)
 
@@ -107,7 +107,7 @@ During the development process, more options and input validations were included
     - Take the survey
     - View the results
     - Exit
-
+- By adding multiple options the user always has a more complete experience allowing him to perform various actions in each menu.
 ![Main Menu](assets/readme-files/main-menu.png)
 
 ### Taking the Survey

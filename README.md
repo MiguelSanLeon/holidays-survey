@@ -114,15 +114,34 @@ During the development process, more options and input validations were included
 
 - This part of the program shows all the questions with the options below and the message "Enter your choice:" 
 
+- In the first question the user will choose between the different age groups. This way it will be easier to show the results of the survey.
 ![Age group question](assets/readme-files/age_group-question.png)
+
+- The second question in the survey allows the user to choose a gender. The first two questions are immutable in the survey.
 ![Gender question](assets/readme-files/gender-question.png)
+
+- From this point on, the survey is reconfigurable and the questions can be modified without fear of affecting the operation of the program. The third question is properly related to the main topic of the survey, and in it we will choose who we like to travel with the most.
 ![Mate question](assets/readme-files/mate-question.png)
+
+- In the fourth question the user will choose between the seasons of the year.
 ![Season question](assets/readme-files/season-question.png)
+
+- In this question the user must choose a continent that has not yet been visited.
 ![Continent question](assets/readme-files/continent-question.png)
+
+- The next question provides users with a list of countries where they can choose the one they would like to visit.
 ![Country question](assets/readme-files/country-question.png)
+
+- The following question offers the user a list of places that are usually visited during holidays.
 ![Places question](assets/readme-files/places-question.png)
+
+- This question offers a list for the user to choose what they liked the most about their holidays.
 ![The most question](assets/readme-files/the-most-question.png)
+
+- This question offers a list for the user to choose what they liked the least about their holidays.
 ![The least question](assets/readme-files/the-least-question.png)
+
+- This is the last question on the survey, although it is possible to add more if necessary and it would not affect the operation of the program.
 ![Recommend question](assets/readme-files/recommend-question.png)
 
 ### Retake Survey or Show Results
@@ -131,6 +150,8 @@ During the development process, more options and input validations were included
     - Repeat the survey
     - Submit the answers and show the survey results
     - Submit the answers and exit
+
+- Again, a variety of options are displayed to choose from and all the information collected during the survey is offered for review and approval.
 
 ![Survey results](assets/readme-files/survey-results.png)
 
@@ -212,7 +233,7 @@ During the development process, more options and input validations were included
 ![PEP8](assets/readme-files/pep8.png)
 
 - There is a persistent problem when using codeanywhere code validation. This problem was not shown in Code Institute validation.
-The variable is used inside the function to append the user_input.
+The variable user_choices is called inside the function display_questions_and_options as global variable, and then is used inside the function to append the user_input.
 ![Problem](assets/readme-files/problem.png)
 
 ## Feature Testing
